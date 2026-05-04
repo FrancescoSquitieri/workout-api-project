@@ -1,0 +1,25 @@
+services:
+  db:
+    container_name: workoutDB
+    image: postgres:12.4-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: workoutDB
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./database/postgres-data:/var/lib/postgresql/data:rw
+    restart: unless-stopped
+  test_db: 
+    container_name: workoutDB_test
+    image: postgres:12.4-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: workoutDB_test
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./database/postgres-test-data:/var/lib/postgresql/data:rw
+    restart: unless-stopped
